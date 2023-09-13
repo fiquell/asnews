@@ -1,0 +1,21 @@
+---
+const menuLinks: Array<{ title: string; path: string }> = [
+  { title: "Blog", path: "/blog" },
+  { title: "About", path: "/about" }
+]
+---
+
+<header class="flex justify-between">
+  <a href="/">The Asnews</a>
+  <nav class="flex gap-5">
+    {
+      menuLinks.map((link) => (
+        <a
+          href={link.path}
+          class={Astro.url.pathname === link.path ? "underline" : ""}>
+          {link.title}
+        </a>
+      ))
+    }
+  </nav>
+</header>

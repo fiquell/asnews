@@ -1,11 +1,15 @@
 ---
+import Footer from "@components/Footer.astro"
+import Header from "@components/Header.astro"
+import { ViewTransitions } from "astro:transitions"
+
 interface Props {
   title?: string
   description?: string
 }
 
 const {
-  title = "Asnews - Find News and Blog Articles",
+  title = "Asnews",
   description = "Discover global news articles in real-time with Asnews"
 } = Astro.props
 ---
@@ -18,9 +22,12 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{title} • Find News and Blog Articles</title>
+    <ViewTransitions />
   </head>
-  <body>
+  <body class="bg-neutral-950 text-neutral-50 mx-auto max-w-3xl px-4">
+    <Header />
     <slot />
+    <Footer />
   </body>
 </html>
