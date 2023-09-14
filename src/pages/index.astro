@@ -1,9 +1,27 @@
 ---
+import type { Articles } from "@interfaces/top-headlines"
 import Layout from "@layouts/Layout.astro"
+import newsapi from "@lib/newsapi"
+
+const articles = await newsapi<Articles[]>({
+  endpoint: "top-headlines",
+  country: "us",
+  category: "general",
+  wrappedByKey: "articles"
+})
 ---
 
 <Layout>
-  <section>
-    <p>Home</p>
+  <section class="flex flex-col mt-10">
+    <p class="text-3xl font-bold mb-5">Top Headlines</p>
+    {
+      articles.map((article) => (
+        <a
+          href={`/blog/${article.publishedAt}`}
+          class="hover:underline truncate py-2">
+          {article.title}
+        </a>
+      ))
+    }
   </section>
 </Layout>
