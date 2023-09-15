@@ -1,9 +1,9 @@
 ---
-import type { Articles } from "@interfaces/top-headlines"
+import type { Article } from "@interfaces/newsapi"
 import Layout from "@layouts/Layout.astro"
 import newsapi from "@lib/newsapi"
 
-const articles = await newsapi<Articles[]>({
+const articles = await newsapi<Article[]>({
   endpoint: "top-headlines",
   country: "us",
   category: "general",
@@ -13,7 +13,6 @@ const articles = await newsapi<Articles[]>({
 
 <Layout>
   <section class="flex flex-col mt-10">
-    <p class="text-3xl font-bold mb-5">Top Headlines</p>
     {
       articles.map((article) => (
         <a

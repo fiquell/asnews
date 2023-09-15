@@ -1,10 +1,10 @@
 ---
-import type { Articles } from "@interfaces/top-headlines"
+import type { Article } from "@interfaces/newsapi"
 import Layout from "@layouts/Layout.astro"
 import newsapi from "@lib/newsapi"
 
 export const getStaticPaths = async () => {
-  const articles = await newsapi<Articles[]>({
+  const articles = await newsapi<Article[]>({
     endpoint: "top-headlines",
     country: "us",
     category: "general",
@@ -17,7 +17,7 @@ export const getStaticPaths = async () => {
   }))
 }
 
-type Props = Articles
+type Props = Article
 
 const article = Astro.props
 ---
