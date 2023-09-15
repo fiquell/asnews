@@ -1,9 +1,9 @@
 ---
 import type { Article } from "@interfaces/newsapi"
 import Layout from "@layouts/Layout.astro"
-import newsapi from "@lib/newsapi"
+import { FTopHeadlines } from "@lib/newsapi"
 
-const articles = await newsapi<Article[]>({
+const articles = await FTopHeadlines<Article[]>({
   endpoint: "top-headlines",
   country: "us",
   category: "general",

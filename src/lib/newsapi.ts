@@ -1,27 +1,13 @@
-interface Props {
-  endpoint: string
-  country: "id" | "us"
-  category:
-    | "business"
-    | "entertainment"
-    | "general"
-    | "health"
-    | "science"
-    | "sports"
-    | "technology"
-  pageSize?: number
-  wrappedByKey?: string
-  wrappedByList?: boolean
-}
+import type { Article, Main, TopHeadlines } from "@interfaces/newsapi"
 
-export default async <T>({
+export const FTopHeadlines = async <T>({
   endpoint,
   country,
   category,
   pageSize = 10,
   wrappedByKey,
   wrappedByList
-}: Props): Promise<T> => {
+}: TopHeadlines): Promise<T> => {
   // prettier-ignore
   const url = new URL(
     import.meta.env.NEWSAPI_URL + "/v2/" + endpoint
@@ -32,14 +18,18 @@ export default async <T>({
   )
 
   const response = await fetch(url)
-  let data = await response.json()
+  let data: Main | Article[] = await response.json()
+
+  if (endpoint.startsWith("/")) {
+    endpoint = endpoint.slice(1)
+  }
 
   if (wrappedByKey) {
-    data = data[wrappedByKey]
+    data = data[wrappedByKey as keyof typeof data]
   }
 
   if (wrappedByList) {
-    data = data[0]
+    data = data[0 as keyof typeof data]
   }
 
   return data as T
