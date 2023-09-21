@@ -22,7 +22,6 @@ export interface Source {
 
 export interface TopHeadlines {
   endpoint:       string
-  country?:       Country
   category?:      Category
   q?:             string
   pageSize?:      number
@@ -30,8 +29,6 @@ export interface TopHeadlines {
   wrappedByKey?:  string
   wrappedByList?: boolean
 }
-
-export type Country = "id" | "us"
 
 export type Category =
   | "business"

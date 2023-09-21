@@ -6,7 +6,6 @@ import slug from "@lib/slug"
 
 const articles = await FTopHeadlines<Article[]>({
   endpoint: "top-headlines",
-  country: "us",
   category: "technology",
   wrappedByKey: "articles"
 })

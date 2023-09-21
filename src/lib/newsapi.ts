@@ -2,7 +2,6 @@ import type { Article, Main, TopHeadlines } from "@interfaces/newsapi"
 
 export const FTopHeadlines = async <T>({
   endpoint,
-  country,
   category,
   pageSize = 10,
   wrappedByKey,
@@ -12,7 +11,7 @@ export const FTopHeadlines = async <T>({
   const url = new URL(
     import.meta.env.NEWSAPI_URL + "/v2/" + endpoint
     + "?apiKey=" + import.meta.env.NEWSAPI_API_KEY
-    + "&country=" + country
+    + "&country=" + "us"
     + "&category=" + category
     + "&pageSize=" + pageSize
   )
