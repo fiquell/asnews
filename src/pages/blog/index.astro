@@ -1,9 +1,28 @@
 ---
+import type { Article } from "@interfaces/newsapi"
 import Layout from "@layouts/Layout.astro"
+import { FTopHeadlines } from "@lib/newsapi"
+import slug from "@lib/slug"
+
+const articles = await FTopHeadlines<Article[]>({
+  endpoint: "top-headlines",
+  country: "us",
+  category: "entertainment",
+  wrappedByKey: "articles"
+})
 ---
 
 <Layout title="Blog">
-  <section>
-    <p>Blog</p>
+  <section class="flex flex-col mt-10">
+    <p class="text-3xl font-bold mb-5">Blog</p>
+    {
+      articles.map((article) => (
+        <a
+          href={`/blog/${slug(article.title)}`}
+          class="hover:underline truncate py-2">
+          {article.title}
+        </a>
+      ))
+    }
   </section>
 </Layout>
