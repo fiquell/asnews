@@ -1,7 +1,8 @@
 {
   "name": "asnews",
-  "type": "module",
   "version": "0.0.1",
+  "description": "Discover global news articles in real-time with Asnews",
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
