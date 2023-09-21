@@ -2,17 +2,18 @@
 import type { Article } from "@interfaces/newsapi"
 import Layout from "@layouts/Layout.astro"
 import { FTopHeadlines } from "@lib/newsapi"
+import slug from "@lib/slug"
 
 export const getStaticPaths = async () => {
   const articles = await FTopHeadlines<Article[]>({
     endpoint: "top-headlines",
     country: "us",
-    category: "general",
+    category: "technology",
     wrappedByKey: "articles"
   })
 
   return articles.map((article) => ({
-    params: { slug: article.publishedAt },
+    params: { slug: slug(article.title) },
     props: article
   }))
 }

@@ -2,11 +2,12 @@
 import type { Article } from "@interfaces/newsapi"
 import Layout from "@layouts/Layout.astro"
 import { FTopHeadlines } from "@lib/newsapi"
+import slug from "@lib/slug"
 
 const articles = await FTopHeadlines<Article[]>({
   endpoint: "top-headlines",
   country: "us",
-  category: "general",
+  category: "technology",
   wrappedByKey: "articles"
 })
 ---
@@ -16,7 +17,7 @@ const articles = await FTopHeadlines<Article[]>({
     {
       articles.map((article) => (
         <a
-          href={`/blog/${article.publishedAt}`}
+          href={`/blog/${slug(article.title)}`}
           class="hover:underline truncate py-2">
           {article.title}
         </a>
